@@ -1,10 +1,15 @@
 name: 'Notion release notes'
 description: 'Creates a new page in an existing database to capture release notes'
 inputs:
+  token:
+    description: 'Notion API token'
+    required: true    
+  database:
+    description: 'Parent database to add to'
+    required: true    
   body:  
     description: 'Body content for release notes'
     required: true
-    default: 'No content'
 outputs:
   status: 
     description: 'The status of the update'
