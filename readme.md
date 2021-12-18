@@ -1,22 +1,22 @@
 # Notion Release Notes
 
-This action allows you to specify an existing database in your Notion account that it can add a release note to within an action.
+This action allows you to specify an existing database in your Notion workspace, and create a new entry each time your action runs.  This is currently specifically aimed at release notes, but could be used for a more generic purpose if you like, fields are kept purposefully quite generic.
 
-Typically used alongside https://github.com/mikepenz/release-changelog-builder-action
+This would typically be used alongside https://github.com/mikepenz/release-changelog-builder-action to actually programmatically build the release notes based on tags / pull-requests.
 
 ## Notion integration and token
 
-You need to have an integration access token - which you can get from https://www.notion.so/my-integrations after creating an integration.
+First, you need to have an integration access token - which you can get from https://www.notion.so/my-integrations after creating an integration.  Give the integration a friendly name like 'Github Action Release Notes'.
+
+By default integrations cant access any contentm so you you *must* share your database with the integration you created earlier to be able to access it!
 
 ## Notion Database
 
 This action expects a Notion database with the following properties:
 
-Name: text
-Date: date
-Tags: tags
-
-Note that you *must* share your database with the integration you created earlier to be able to access it!
+  - Name: text
+  - Date: date
+  - Tags: tags
 
 It can look like this:
 
@@ -41,8 +41,8 @@ Typically this is used with a changelog builder:
   with:          
     token: ${{ secrets.NOTION_TOKEN }}
     database: 619f0845c68a4c18837ebdb9812b90c0
-    name: Release    
-    tags: tag,comma,separated
+    name: Super Amazing Service    
+    tags: segment,team,service-name
     body: ${{ steps.build_changelog.outputs.changelog }}
 ```
 
