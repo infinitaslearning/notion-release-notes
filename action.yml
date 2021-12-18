@@ -1,0 +1,13 @@
+name: 'Notion release notes'
+description: 'Creates a new page in an existing database to capture release notes'
+inputs:
+  body:  
+    description: 'Body content for release notes'
+    required: true
+    default: 'No content'
+outputs:
+  status: 
+    description: 'The status of the update'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
