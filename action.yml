@@ -7,9 +7,15 @@ inputs:
   database:
     description: 'Parent database to add to'
     required: true    
+  name:  
+    description: 'Name for the release'
+    required: true
   body:  
     description: 'Body content for release notes'
     required: true
+  tags:  
+    description: 'Comma separated tag list'
+    required: false
 outputs:
   status: 
     description: 'The status of the update'
