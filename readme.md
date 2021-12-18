@@ -11,9 +11,18 @@ You need to have set `env.NOTION_TOKEN` - which you can get from https://www.not
 ## Usage
 
 ```
-
+- name: Notion release notes        
+  uses: infinitaslearning/notion-release-notes@main        
+  with:          
+    token: ${{ secrets.NOTION_TOKEN }}
+    database: 619f0845c68a4c18837ebdb9812b90c0    
+    body: ${{ steps.build_changelog.outputs.changelog }}
 ```
+
+To get the database ID, simply browse to it, click on the '...' and get a 'Copy link'.  The GUID at the end of the URL is the id.
 
 ## Development
 
 Assumes you have `@vercel/ncc` installed globally.
+
+After changes ensure you `npm run build` and then push.
