@@ -16,9 +16,24 @@ Name: text
 Date: date
 Tags: tags
 
+It can look like this:
+
+<img width="981" alt="Screenshot 2021-12-18 at 08 55 42" src="https://user-images.githubusercontent.com/239305/146633970-5e1baaf8-6457-4664-b56c-284355e3b241.png">
+
+And each actual page contains whatever your release notes are:
+
+<img width="765" alt="Screenshot 2021-12-18 at 08 56 44" src="https://user-images.githubusercontent.com/239305/146633996-116ff1af-5fe7-4642-ab65-3c0f6ccedf1e.png">
+
 ## Usage
 
-```
+Typically this is used with a changelog builder:
+
+```yaml
+- name: Release Changelog Builder
+    uses: mikepenz/release-changelog-builder-action@v2.7.1
+    id: build_changelog
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   
 - name: Notion release notes        
   uses: infinitaslearning/notion-release-notes@main        
   with:          
@@ -34,5 +49,4 @@ To get the database ID, simply browse to it, click on the '...' and get a 'Copy 
 ## Development
 
 Assumes you have `@vercel/ncc` installed globally.
-
-After changes ensure you `npm run build` and then push.
+After changes ensure you `npm run build`, commit and then submit a PR.
