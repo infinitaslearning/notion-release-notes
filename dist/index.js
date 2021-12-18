@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 7351:
+/***/ 4569:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -28,7 +28,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.issue = exports.issueCommand = void 0;
 const os = __importStar(__nccwpck_require__(2037));
-const utils_1 = __nccwpck_require__(5278);
+const utils_1 = __nccwpck_require__(4549);
 /**
  * Commands
  *
@@ -100,7 +100,7 @@ function escapeProperty(s) {
 
 /***/ }),
 
-/***/ 2186:
+/***/ 272:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -135,12 +135,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getIDToken = exports.getState = exports.saveState = exports.group = exports.endGroup = exports.startGroup = exports.info = exports.notice = exports.warning = exports.error = exports.debug = exports.isDebug = exports.setFailed = exports.setCommandEcho = exports.setOutput = exports.getBooleanInput = exports.getMultilineInput = exports.getInput = exports.addPath = exports.setSecret = exports.exportVariable = exports.ExitCode = void 0;
-const command_1 = __nccwpck_require__(7351);
-const file_command_1 = __nccwpck_require__(717);
-const utils_1 = __nccwpck_require__(5278);
+const command_1 = __nccwpck_require__(4569);
+const file_command_1 = __nccwpck_require__(8623);
+const utils_1 = __nccwpck_require__(4549);
 const os = __importStar(__nccwpck_require__(2037));
 const path = __importStar(__nccwpck_require__(1017));
-const oidc_utils_1 = __nccwpck_require__(8041);
+const oidc_utils_1 = __nccwpck_require__(8892);
 /**
  * The code to exit an action
  */
@@ -419,7 +419,7 @@ exports.getIDToken = getIDToken;
 
 /***/ }),
 
-/***/ 717:
+/***/ 8623:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -450,7 +450,7 @@ exports.issueCommand = void 0;
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const fs = __importStar(__nccwpck_require__(7147));
 const os = __importStar(__nccwpck_require__(2037));
-const utils_1 = __nccwpck_require__(5278);
+const utils_1 = __nccwpck_require__(4549);
 function issueCommand(command, message) {
     const filePath = process.env[`GITHUB_${command}`];
     if (!filePath) {
@@ -468,7 +468,7 @@ exports.issueCommand = issueCommand;
 
 /***/ }),
 
-/***/ 8041:
+/***/ 8892:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -484,9 +484,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.OidcClient = void 0;
-const http_client_1 = __nccwpck_require__(9925);
-const auth_1 = __nccwpck_require__(3702);
-const core_1 = __nccwpck_require__(2186);
+const http_client_1 = __nccwpck_require__(6677);
+const auth_1 = __nccwpck_require__(2857);
+const core_1 = __nccwpck_require__(272);
 class OidcClient {
     static createHttpClient(allowRetry = true, maxRetry = 10) {
         const requestOptions = {
@@ -552,7 +552,7 @@ exports.OidcClient = OidcClient;
 
 /***/ }),
 
-/***/ 5278:
+/***/ 4549:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -599,7 +599,7 @@ exports.toCommandProperties = toCommandProperties;
 
 /***/ }),
 
-/***/ 4087:
+/***/ 7126:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -660,7 +660,7 @@ exports.Context = Context;
 
 /***/ }),
 
-/***/ 5438:
+/***/ 1728:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -686,8 +686,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getOctokit = exports.context = void 0;
-const Context = __importStar(__nccwpck_require__(4087));
-const utils_1 = __nccwpck_require__(3030);
+const Context = __importStar(__nccwpck_require__(7126));
+const utils_1 = __nccwpck_require__(5294);
 exports.context = new Context.Context();
 /**
  * Returns a hydrated octokit ready to use for GitHub Actions
@@ -703,7 +703,7 @@ exports.getOctokit = getOctokit;
 
 /***/ }),
 
-/***/ 7914:
+/***/ 2716:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -729,7 +729,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getApiBaseUrl = exports.getProxyAgent = exports.getAuthString = void 0;
-const httpClient = __importStar(__nccwpck_require__(9925));
+const httpClient = __importStar(__nccwpck_require__(6677));
 function getAuthString(token, options) {
     if (!token && !options.auth) {
         throw new Error('Parameter token or opts.auth is required');
@@ -753,7 +753,7 @@ exports.getApiBaseUrl = getApiBaseUrl;
 
 /***/ }),
 
-/***/ 3030:
+/***/ 5294:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -779,12 +779,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getOctokitOptions = exports.GitHub = exports.context = void 0;
-const Context = __importStar(__nccwpck_require__(4087));
-const Utils = __importStar(__nccwpck_require__(7914));
+const Context = __importStar(__nccwpck_require__(7126));
+const Utils = __importStar(__nccwpck_require__(2716));
 // octokit + plugins
-const core_1 = __nccwpck_require__(6762);
-const plugin_rest_endpoint_methods_1 = __nccwpck_require__(3044);
-const plugin_paginate_rest_1 = __nccwpck_require__(4193);
+const core_1 = __nccwpck_require__(5251);
+const plugin_rest_endpoint_methods_1 = __nccwpck_require__(1492);
+const plugin_paginate_rest_1 = __nccwpck_require__(6647);
 exports.context = new Context.Context();
 const baseUrl = Utils.getApiBaseUrl();
 const defaults = {
@@ -814,7 +814,7 @@ exports.getOctokitOptions = getOctokitOptions;
 
 /***/ }),
 
-/***/ 3702:
+/***/ 2857:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -880,7 +880,7 @@ exports.PersonalAccessTokenCredentialHandler = PersonalAccessTokenCredentialHand
 
 /***/ }),
 
-/***/ 9925:
+/***/ 6677:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -888,7 +888,7 @@ exports.PersonalAccessTokenCredentialHandler = PersonalAccessTokenCredentialHand
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const http = __nccwpck_require__(3685);
 const https = __nccwpck_require__(5687);
-const pm = __nccwpck_require__(6443);
+const pm = __nccwpck_require__(2134);
 let tunnel;
 var HttpCodes;
 (function (HttpCodes) {
@@ -1307,7 +1307,7 @@ class HttpClient {
         if (useProxy) {
             // If using proxy, need tunnel
             if (!tunnel) {
-                tunnel = __nccwpck_require__(4294);
+                tunnel = __nccwpck_require__(7931);
             }
             const agentOptions = {
                 maxSockets: maxSockets,
@@ -1425,7 +1425,7 @@ exports.HttpClient = HttpClient;
 
 /***/ }),
 
-/***/ 6443:
+/***/ 2134:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -1490,7 +1490,860 @@ exports.checkBypass = checkBypass;
 
 /***/ }),
 
-/***/ 334:
+/***/ 3466:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _Client_auth, _Client_logLevel, _Client_logger, _Client_prefixUrl, _Client_timeoutMs, _Client_notionVersion, _Client_fetch, _Client_agent, _Client_userAgent;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const logging_1 = __nccwpck_require__(2230);
+const errors_1 = __nccwpck_require__(7787);
+const helpers_1 = __nccwpck_require__(8002);
+const api_endpoints_1 = __nccwpck_require__(2859);
+const node_fetch_1 = __nccwpck_require__(7636);
+const package_json_1 = __nccwpck_require__(3797);
+class Client {
+    constructor(options) {
+        var _a, _b, _c, _d, _e, _f;
+        _Client_auth.set(this, void 0);
+        _Client_logLevel.set(this, void 0);
+        _Client_logger.set(this, void 0);
+        _Client_prefixUrl.set(this, void 0);
+        _Client_timeoutMs.set(this, void 0);
+        _Client_notionVersion.set(this, void 0);
+        _Client_fetch.set(this, void 0);
+        _Client_agent.set(this, void 0);
+        _Client_userAgent.set(this, void 0);
+        /*
+         * Notion API endpoints
+         */
+        this.blocks = {
+            /**
+             * Retrieve block
+             */
+            retrieve: (args) => {
+                return this.request({
+                    path: api_endpoints_1.getBlock.path(args),
+                    method: api_endpoints_1.getBlock.method,
+                    query: helpers_1.pick(args, api_endpoints_1.getBlock.queryParams),
+                    body: helpers_1.pick(args, api_endpoints_1.getBlock.bodyParams),
+                    auth: args === null || args === void 0 ? void 0 : args.auth,
+                });
+            },
+            /**
+             * Update block
+             */
+            update: (args) => {
+                return this.request({
+                    path: api_endpoints_1.updateBlock.path(args),
+                    method: api_endpoints_1.updateBlock.method,
+                    query: helpers_1.pick(args, api_endpoints_1.updateBlock.queryParams),
+                    body: helpers_1.pick(args, api_endpoints_1.updateBlock.bodyParams),
+                    auth: args === null || args === void 0 ? void 0 : args.auth,
+                });
+            },
+            /**
+             * Delete block
+             */
+            delete: (args) => {
+                return this.request({
+                    path: api_endpoints_1.deleteBlock.path(args),
+                    method: api_endpoints_1.deleteBlock.method,
+                    query: helpers_1.pick(args, api_endpoints_1.deleteBlock.queryParams),
+                    body: helpers_1.pick(args, api_endpoints_1.deleteBlock.bodyParams),
+                    auth: args === null || args === void 0 ? void 0 : args.auth,
+                });
+            },
+            children: {
+                /**
+                 * Append block children
+                 */
+                append: (args) => {
+                    return this.request({
+                        path: api_endpoints_1.appendBlockChildren.path(args),
+                        method: api_endpoints_1.appendBlockChildren.method,
+                        query: helpers_1.pick(args, api_endpoints_1.appendBlockChildren.queryParams),
+                        body: helpers_1.pick(args, api_endpoints_1.appendBlockChildren.bodyParams),
+                        auth: args === null || args === void 0 ? void 0 : args.auth,
+                    });
+                },
+                /**
+                 * Retrieve block children
+                 */
+                list: (args) => {
+                    return this.request({
+                        path: api_endpoints_1.listBlockChildren.path(args),
+                        method: api_endpoints_1.listBlockChildren.method,
+                        query: helpers_1.pick(args, api_endpoints_1.listBlockChildren.queryParams),
+                        body: helpers_1.pick(args, api_endpoints_1.listBlockChildren.bodyParams),
+                        auth: args === null || args === void 0 ? void 0 : args.auth,
+                    });
+                },
+            },
+        };
+        this.databases = {
+            /**
+             * List databases
+             *
+             * @deprecated Please use `search`
+             */
+            list: (args) => {
+                return this.request({
+                    path: api_endpoints_1.listDatabases.path(),
+                    method: api_endpoints_1.listDatabases.method,
+                    query: helpers_1.pick(args, api_endpoints_1.listDatabases.queryParams),
+                    body: helpers_1.pick(args, api_endpoints_1.listDatabases.bodyParams),
+                    auth: args === null || args === void 0 ? void 0 : args.auth,
+                });
+            },
+            /**
+             * Retrieve a database
+             */
+            retrieve: (args) => {
+                return this.request({
+                    path: api_endpoints_1.getDatabase.path(args),
+                    method: api_endpoints_1.getDatabase.method,
+                    query: helpers_1.pick(args, api_endpoints_1.getDatabase.queryParams),
+                    body: helpers_1.pick(args, api_endpoints_1.getDatabase.bodyParams),
+                    auth: args === null || args === void 0 ? void 0 : args.auth,
+                });
+            },
+            /**
+             * Query a database
+             */
+            query: (args) => {
+                return this.request({
+                    path: api_endpoints_1.queryDatabase.path(args),
+                    method: api_endpoints_1.queryDatabase.method,
+                    query: helpers_1.pick(args, api_endpoints_1.queryDatabase.queryParams),
+                    body: helpers_1.pick(args, api_endpoints_1.queryDatabase.bodyParams),
+                    auth: args === null || args === void 0 ? void 0 : args.auth,
+                });
+            },
+            /**
+             * Create a database
+             */
+            create: (args) => {
+                return this.request({
+                    path: api_endpoints_1.createDatabase.path(),
+                    method: api_endpoints_1.createDatabase.method,
+                    query: helpers_1.pick(args, api_endpoints_1.createDatabase.queryParams),
+                    body: helpers_1.pick(args, api_endpoints_1.createDatabase.bodyParams),
+                    auth: args === null || args === void 0 ? void 0 : args.auth,
+                });
+            },
+            /**
+             * Update a database
+             */
+            update: (args) => {
+                return this.request({
+                    path: api_endpoints_1.updateDatabase.path(args),
+                    method: api_endpoints_1.updateDatabase.method,
+                    query: helpers_1.pick(args, api_endpoints_1.updateDatabase.queryParams),
+                    body: helpers_1.pick(args, api_endpoints_1.updateDatabase.bodyParams),
+                    auth: args === null || args === void 0 ? void 0 : args.auth,
+                });
+            },
+        };
+        this.pages = {
+            /**
+             * Create a page
+             */
+            create: (args) => {
+                return this.request({
+                    path: api_endpoints_1.createPage.path(),
+                    method: api_endpoints_1.createPage.method,
+                    query: helpers_1.pick(args, api_endpoints_1.createPage.queryParams),
+                    body: helpers_1.pick(args, api_endpoints_1.createPage.bodyParams),
+                    auth: args === null || args === void 0 ? void 0 : args.auth,
+                });
+            },
+            /**
+             * Retrieve a page
+             */
+            retrieve: (args) => {
+                return this.request({
+                    path: api_endpoints_1.getPage.path(args),
+                    method: api_endpoints_1.getPage.method,
+                    query: helpers_1.pick(args, api_endpoints_1.getPage.queryParams),
+                    body: helpers_1.pick(args, api_endpoints_1.getPage.bodyParams),
+                    auth: args === null || args === void 0 ? void 0 : args.auth,
+                });
+            },
+            /**
+             * Update page properties
+             */
+            update: (args) => {
+                return this.request({
+                    path: api_endpoints_1.updatePage.path(args),
+                    method: api_endpoints_1.updatePage.method,
+                    query: helpers_1.pick(args, api_endpoints_1.updatePage.queryParams),
+                    body: helpers_1.pick(args, api_endpoints_1.updatePage.bodyParams),
+                    auth: args === null || args === void 0 ? void 0 : args.auth,
+                });
+            },
+            properties: {
+                /**
+                 * Retrieve page property
+                 */
+                retrieve: (args) => {
+                    return this.request({
+                        path: api_endpoints_1.getPageProperty.path(args),
+                        method: api_endpoints_1.getPageProperty.method,
+                        query: helpers_1.pick(args, api_endpoints_1.getPageProperty.queryParams),
+                        body: helpers_1.pick(args, api_endpoints_1.getPageProperty.bodyParams),
+                        auth: args === null || args === void 0 ? void 0 : args.auth,
+                    });
+                },
+            },
+        };
+        this.users = {
+            /**
+             * Retrieve a user
+             */
+            retrieve: (args) => {
+                return this.request({
+                    path: api_endpoints_1.getUser.path(args),
+                    method: api_endpoints_1.getUser.method,
+                    query: helpers_1.pick(args, api_endpoints_1.getUser.queryParams),
+                    body: helpers_1.pick(args, api_endpoints_1.getUser.bodyParams),
+                    auth: args === null || args === void 0 ? void 0 : args.auth,
+                });
+            },
+            /**
+             * List all users
+             */
+            list: (args) => {
+                return this.request({
+                    path: api_endpoints_1.listUsers.path(),
+                    method: api_endpoints_1.listUsers.method,
+                    query: helpers_1.pick(args, api_endpoints_1.listUsers.queryParams),
+                    body: helpers_1.pick(args, api_endpoints_1.listUsers.bodyParams),
+                    auth: args === null || args === void 0 ? void 0 : args.auth,
+                });
+            },
+            /**
+             * Get details about bot
+             */
+            me: (args) => {
+                return this.request({
+                    path: api_endpoints_1.getSelf.path(),
+                    method: api_endpoints_1.getSelf.method,
+                    query: helpers_1.pick(args, api_endpoints_1.getSelf.queryParams),
+                    body: helpers_1.pick(args, api_endpoints_1.getSelf.bodyParams),
+                    auth: args === null || args === void 0 ? void 0 : args.auth,
+                });
+            },
+        };
+        __classPrivateFieldSet(this, _Client_auth, options === null || options === void 0 ? void 0 : options.auth, "f");
+        __classPrivateFieldSet(this, _Client_logLevel, (_a = options === null || options === void 0 ? void 0 : options.logLevel) !== null && _a !== void 0 ? _a : logging_1.LogLevel.WARN, "f");
+        __classPrivateFieldSet(this, _Client_logger, (_b = options === null || options === void 0 ? void 0 : options.logger) !== null && _b !== void 0 ? _b : logging_1.makeConsoleLogger(package_json_1.name), "f");
+        __classPrivateFieldSet(this, _Client_prefixUrl, ((_c = options === null || options === void 0 ? void 0 : options.baseUrl) !== null && _c !== void 0 ? _c : "https://api.notion.com") + "/v1/", "f");
+        __classPrivateFieldSet(this, _Client_timeoutMs, (_d = options === null || options === void 0 ? void 0 : options.timeoutMs) !== null && _d !== void 0 ? _d : 60000, "f");
+        __classPrivateFieldSet(this, _Client_notionVersion, (_e = options === null || options === void 0 ? void 0 : options.notionVersion) !== null && _e !== void 0 ? _e : Client.defaultNotionVersion, "f");
+        __classPrivateFieldSet(this, _Client_fetch, (_f = options === null || options === void 0 ? void 0 : options.fetch) !== null && _f !== void 0 ? _f : node_fetch_1.default, "f");
+        __classPrivateFieldSet(this, _Client_agent, options === null || options === void 0 ? void 0 : options.agent, "f");
+        __classPrivateFieldSet(this, _Client_userAgent, `notionhq-client/${package_json_1.version}`, "f");
+    }
+    /**
+     * Sends a request.
+     *
+     * @param path
+     * @param method
+     * @param query
+     * @param body
+     * @returns
+     */
+    async request({ path, method, query, body, auth, }) {
+        this.log(logging_1.LogLevel.INFO, "request start", { method, path });
+        // If the body is empty, don't send the body in the HTTP request
+        const bodyAsJsonString = !body || Object.entries(body).length === 0
+            ? undefined
+            : JSON.stringify(body);
+        const url = new URL(`${__classPrivateFieldGet(this, _Client_prefixUrl, "f")}${path}`);
+        if (query) {
+            for (const [key, value] of Object.entries(query)) {
+                if (value !== undefined) {
+                    url.searchParams.append(key, String(value));
+                }
+            }
+        }
+        const headers = {
+            ...this.authAsHeaders(auth),
+            "Notion-Version": __classPrivateFieldGet(this, _Client_notionVersion, "f"),
+            "user-agent": __classPrivateFieldGet(this, _Client_userAgent, "f"),
+        };
+        if (bodyAsJsonString !== undefined) {
+            headers["content-type"] = "application/json";
+        }
+        try {
+            const response = await errors_1.RequestTimeoutError.rejectAfterTimeout(__classPrivateFieldGet(this, _Client_fetch, "f").call(this, url.toString(), {
+                method,
+                headers,
+                body: bodyAsJsonString,
+                agent: __classPrivateFieldGet(this, _Client_agent, "f"),
+            }), __classPrivateFieldGet(this, _Client_timeoutMs, "f"));
+            const responseText = await response.text();
+            if (!response.ok) {
+                throw errors_1.buildRequestError(response, responseText);
+            }
+            const responseJson = JSON.parse(responseText);
+            this.log(logging_1.LogLevel.INFO, `request success`, { method, path });
+            return responseJson;
+        }
+        catch (error) {
+            if (!errors_1.isNotionClientError(error)) {
+                throw error;
+            }
+            // Log the error if it's one of our known error types
+            this.log(logging_1.LogLevel.WARN, `request fail`, {
+                code: error.code,
+                message: error.message,
+            });
+            if (errors_1.isHTTPResponseError(error)) {
+                // The response body may contain sensitive information so it is logged separately at the DEBUG level
+                this.log(logging_1.LogLevel.DEBUG, `failed response body`, {
+                    body: error.body,
+                });
+            }
+            throw error;
+        }
+    }
+    /**
+     * Search
+     */
+    search(args) {
+        return this.request({
+            path: api_endpoints_1.search.path(),
+            method: api_endpoints_1.search.method,
+            query: helpers_1.pick(args, api_endpoints_1.search.queryParams),
+            body: helpers_1.pick(args, api_endpoints_1.search.bodyParams),
+            auth: args === null || args === void 0 ? void 0 : args.auth,
+        });
+    }
+    /**
+     * Emits a log message to the console.
+     *
+     * @param level The level for this message
+     * @param args Arguments to send to the console
+     */
+    log(level, message, extraInfo) {
+        if (logging_1.logLevelSeverity(level) >= logging_1.logLevelSeverity(__classPrivateFieldGet(this, _Client_logLevel, "f"))) {
+            __classPrivateFieldGet(this, _Client_logger, "f").call(this, level, message, extraInfo);
+        }
+    }
+    /**
+     * Transforms an API key or access token into a headers object suitable for an HTTP request.
+     *
+     * This method uses the instance's value as the default when the input is undefined. If neither are defined, it returns
+     * an empty object
+     *
+     * @param auth API key or access token
+     * @returns headers key-value object
+     */
+    authAsHeaders(auth) {
+        const headers = {};
+        const authHeaderValue = auth !== null && auth !== void 0 ? auth : __classPrivateFieldGet(this, _Client_auth, "f");
+        if (authHeaderValue !== undefined) {
+            headers["authorization"] = `Bearer ${authHeaderValue}`;
+        }
+        return headers;
+    }
+}
+exports["default"] = Client;
+_Client_auth = new WeakMap(), _Client_logLevel = new WeakMap(), _Client_logger = new WeakMap(), _Client_prefixUrl = new WeakMap(), _Client_timeoutMs = new WeakMap(), _Client_notionVersion = new WeakMap(), _Client_fetch = new WeakMap(), _Client_agent = new WeakMap(), _Client_userAgent = new WeakMap();
+Client.defaultNotionVersion = "2021-08-16";
+//# sourceMappingURL=Client.js.map
+
+/***/ }),
+
+/***/ 2859:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+// cspell:disable-file
+// Note: This is a generated file.
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.search = exports.createDatabase = exports.listDatabases = exports.queryDatabase = exports.updateDatabase = exports.getDatabase = exports.appendBlockChildren = exports.listBlockChildren = exports.deleteBlock = exports.updateBlock = exports.getBlock = exports.getPageProperty = exports.updatePage = exports.getPage = exports.createPage = exports.listUsers = exports.getUser = exports.getSelf = void 0;
+exports.getSelf = {
+    method: "get",
+    pathParams: [],
+    queryParams: [],
+    bodyParams: [],
+    path: () => `users/me`,
+};
+exports.getUser = {
+    method: "get",
+    pathParams: ["user_id"],
+    queryParams: [],
+    bodyParams: [],
+    path: (p) => `users/${p.user_id}`,
+};
+exports.listUsers = {
+    method: "get",
+    pathParams: [],
+    queryParams: ["start_cursor", "page_size"],
+    bodyParams: [],
+    path: () => `users`,
+};
+exports.createPage = {
+    method: "post",
+    pathParams: [],
+    queryParams: [],
+    bodyParams: ["parent", "properties", "icon", "cover", "content", "children"],
+    path: () => `pages`,
+};
+exports.getPage = {
+    method: "get",
+    pathParams: ["page_id"],
+    queryParams: [],
+    bodyParams: [],
+    path: (p) => `pages/${p.page_id}`,
+};
+exports.updatePage = {
+    method: "patch",
+    pathParams: ["page_id"],
+    queryParams: [],
+    bodyParams: ["properties", "icon", "cover", "archived"],
+    path: (p) => `pages/${p.page_id}`,
+};
+exports.getPageProperty = {
+    method: "get",
+    pathParams: ["page_id", "property_id"],
+    queryParams: ["start_cursor", "page_size"],
+    bodyParams: [],
+    path: (p) => `pages/${p.page_id}/properties/${p.property_id}`,
+};
+exports.getBlock = {
+    method: "get",
+    pathParams: ["block_id"],
+    queryParams: [],
+    bodyParams: [],
+    path: (p) => `blocks/${p.block_id}`,
+};
+exports.updateBlock = {
+    method: "patch",
+    pathParams: ["block_id"],
+    queryParams: [],
+    bodyParams: [
+        "heading_1",
+        "type",
+        "archived",
+        "heading_2",
+        "heading_3",
+        "embed",
+        "bookmark",
+        "image",
+        "video",
+        "pdf",
+        "file",
+        "audio",
+        "code",
+        "equation",
+        "divider",
+        "breadcrumb",
+        "table_of_contents",
+        "link_to_page",
+        "paragraph",
+        "bulleted_list_item",
+        "numbered_list_item",
+        "quote",
+        "to_do",
+        "toggle",
+        "template",
+        "callout",
+        "synced_block",
+    ],
+    path: (p) => `blocks/${p.block_id}`,
+};
+exports.deleteBlock = {
+    method: "delete",
+    pathParams: ["block_id"],
+    queryParams: [],
+    bodyParams: [],
+    path: (p) => `blocks/${p.block_id}`,
+};
+exports.listBlockChildren = {
+    method: "get",
+    pathParams: ["block_id"],
+    queryParams: ["start_cursor", "page_size"],
+    bodyParams: [],
+    path: (p) => `blocks/${p.block_id}/children`,
+};
+exports.appendBlockChildren = {
+    method: "patch",
+    pathParams: ["block_id"],
+    queryParams: [],
+    bodyParams: ["children"],
+    path: (p) => `blocks/${p.block_id}/children`,
+};
+exports.getDatabase = {
+    method: "get",
+    pathParams: ["database_id"],
+    queryParams: [],
+    bodyParams: [],
+    path: (p) => `databases/${p.database_id}`,
+};
+exports.updateDatabase = {
+    method: "patch",
+    pathParams: ["database_id"],
+    queryParams: [],
+    bodyParams: ["title", "icon", "cover", "properties"],
+    path: (p) => `databases/${p.database_id}`,
+};
+exports.queryDatabase = {
+    method: "post",
+    pathParams: ["database_id"],
+    queryParams: [],
+    bodyParams: ["sorts", "filter", "start_cursor", "page_size", "archived"],
+    path: (p) => `databases/${p.database_id}/query`,
+};
+exports.listDatabases = {
+    method: "get",
+    pathParams: [],
+    queryParams: ["start_cursor", "page_size"],
+    bodyParams: [],
+    path: () => `databases`,
+};
+exports.createDatabase = {
+    method: "post",
+    pathParams: [],
+    queryParams: [],
+    bodyParams: ["parent", "properties", "icon", "cover", "title"],
+    path: () => `databases`,
+};
+exports.search = {
+    method: "post",
+    pathParams: [],
+    queryParams: [],
+    bodyParams: ["sort", "query", "start_cursor", "page_size", "filter"],
+    path: () => `search`,
+};
+//# sourceMappingURL=api-endpoints.js.map
+
+/***/ }),
+
+/***/ 7787:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.buildRequestError = exports.APIResponseError = exports.UnknownHTTPResponseError = exports.isHTTPResponseError = exports.RequestTimeoutError = exports.isNotionClientError = exports.ClientErrorCode = exports.APIErrorCode = void 0;
+const helpers_1 = __nccwpck_require__(8002);
+/**
+ * Error codes returned in responses from the API.
+ */
+var APIErrorCode;
+(function (APIErrorCode) {
+    APIErrorCode["Unauthorized"] = "unauthorized";
+    APIErrorCode["RestrictedResource"] = "restricted_resource";
+    APIErrorCode["ObjectNotFound"] = "object_not_found";
+    APIErrorCode["RateLimited"] = "rate_limited";
+    APIErrorCode["InvalidJSON"] = "invalid_json";
+    APIErrorCode["InvalidRequestURL"] = "invalid_request_url";
+    APIErrorCode["InvalidRequest"] = "invalid_request";
+    APIErrorCode["ValidationError"] = "validation_error";
+    APIErrorCode["ConflictError"] = "conflict_error";
+    APIErrorCode["InternalServerError"] = "internal_server_error";
+    APIErrorCode["ServiceUnavailable"] = "service_unavailable";
+})(APIErrorCode = exports.APIErrorCode || (exports.APIErrorCode = {}));
+/**
+ * Error codes generated for client errors.
+ */
+var ClientErrorCode;
+(function (ClientErrorCode) {
+    ClientErrorCode["RequestTimeout"] = "notionhq_client_request_timeout";
+    ClientErrorCode["ResponseError"] = "notionhq_client_response_error";
+})(ClientErrorCode = exports.ClientErrorCode || (exports.ClientErrorCode = {}));
+/**
+ * Base error type.
+ */
+class NotionClientErrorBase extends Error {
+}
+/**
+ * @param error any value, usually a caught error.
+ * @returns `true` if error is a `NotionClientError`.
+ */
+function isNotionClientError(error) {
+    return helpers_1.isObject(error) && error instanceof NotionClientErrorBase;
+}
+exports.isNotionClientError = isNotionClientError;
+/**
+ * Narrows down the types of a NotionClientError.
+ * @param error any value, usually a caught error.
+ * @param codes an object mapping from possible error codes to `true`
+ * @returns `true` if error is a `NotionClientError` with a code in `codes`.
+ */
+function isNotionClientErrorWithCode(error, codes) {
+    return isNotionClientError(error) && error.code in codes;
+}
+/**
+ * Error thrown by the client if a request times out.
+ */
+class RequestTimeoutError extends NotionClientErrorBase {
+    constructor(message = "Request to Notion API has timed out") {
+        super(message);
+        this.code = ClientErrorCode.RequestTimeout;
+        this.name = "RequestTimeoutError";
+    }
+    static isRequestTimeoutError(error) {
+        return isNotionClientErrorWithCode(error, {
+            [ClientErrorCode.RequestTimeout]: true,
+        });
+    }
+    static rejectAfterTimeout(promise, timeoutMS) {
+        return new Promise((resolve, reject) => {
+            const timeoutId = setTimeout(() => {
+                reject(new RequestTimeoutError());
+            }, timeoutMS);
+            promise
+                .then(resolve)
+                .catch(reject)
+                .then(() => clearTimeout(timeoutId));
+        });
+    }
+}
+exports.RequestTimeoutError = RequestTimeoutError;
+class HTTPResponseError extends NotionClientErrorBase {
+    constructor(args) {
+        super(args.message);
+        this.name = "HTTPResponseError";
+        const { code, status, headers, rawBodyText } = args;
+        this.code = code;
+        this.status = status;
+        this.headers = headers;
+        this.body = rawBodyText;
+    }
+}
+const httpResponseErrorCodes = {
+    [ClientErrorCode.ResponseError]: true,
+    [APIErrorCode.Unauthorized]: true,
+    [APIErrorCode.RestrictedResource]: true,
+    [APIErrorCode.ObjectNotFound]: true,
+    [APIErrorCode.RateLimited]: true,
+    [APIErrorCode.InvalidJSON]: true,
+    [APIErrorCode.InvalidRequestURL]: true,
+    [APIErrorCode.InvalidRequest]: true,
+    [APIErrorCode.ValidationError]: true,
+    [APIErrorCode.ConflictError]: true,
+    [APIErrorCode.InternalServerError]: true,
+    [APIErrorCode.ServiceUnavailable]: true,
+};
+function isHTTPResponseError(error) {
+    if (!isNotionClientErrorWithCode(error, httpResponseErrorCodes)) {
+        return false;
+    }
+    return true;
+}
+exports.isHTTPResponseError = isHTTPResponseError;
+/**
+ * Error thrown if an API call responds with an unknown error code, or does not respond with
+ * a property-formatted error.
+ */
+class UnknownHTTPResponseError extends HTTPResponseError {
+    constructor(args) {
+        var _a;
+        super({
+            ...args,
+            code: ClientErrorCode.ResponseError,
+            message: (_a = args.message) !== null && _a !== void 0 ? _a : `Request to Notion API failed with status: ${args.status}`,
+        });
+        this.name = "UnknownHTTPResponseError";
+    }
+    static isUnknownHTTPResponseError(error) {
+        return isNotionClientErrorWithCode(error, {
+            [ClientErrorCode.ResponseError]: true,
+        });
+    }
+}
+exports.UnknownHTTPResponseError = UnknownHTTPResponseError;
+const apiErrorCodes = {
+    [APIErrorCode.Unauthorized]: true,
+    [APIErrorCode.RestrictedResource]: true,
+    [APIErrorCode.ObjectNotFound]: true,
+    [APIErrorCode.RateLimited]: true,
+    [APIErrorCode.InvalidJSON]: true,
+    [APIErrorCode.InvalidRequestURL]: true,
+    [APIErrorCode.InvalidRequest]: true,
+    [APIErrorCode.ValidationError]: true,
+    [APIErrorCode.ConflictError]: true,
+    [APIErrorCode.InternalServerError]: true,
+    [APIErrorCode.ServiceUnavailable]: true,
+};
+/**
+ * A response from the API indicating a problem.
+ * Use the `code` property to handle various kinds of errors. All its possible values are in `APIErrorCode`.
+ */
+class APIResponseError extends HTTPResponseError {
+    constructor() {
+        super(...arguments);
+        this.name = "APIResponseError";
+    }
+    static isAPIResponseError(error) {
+        return isNotionClientErrorWithCode(error, apiErrorCodes);
+    }
+}
+exports.APIResponseError = APIResponseError;
+function buildRequestError(response, bodyText) {
+    const apiErrorResponseBody = parseAPIErrorResponseBody(bodyText);
+    if (apiErrorResponseBody !== undefined) {
+        return new APIResponseError({
+            code: apiErrorResponseBody.code,
+            message: apiErrorResponseBody.message,
+            headers: response.headers,
+            status: response.status,
+            rawBodyText: bodyText,
+        });
+    }
+    return new UnknownHTTPResponseError({
+        message: undefined,
+        headers: response.headers,
+        status: response.status,
+        rawBodyText: bodyText,
+    });
+}
+exports.buildRequestError = buildRequestError;
+function parseAPIErrorResponseBody(body) {
+    if (typeof body !== "string") {
+        return;
+    }
+    let parsed;
+    try {
+        parsed = JSON.parse(body);
+    }
+    catch (parseError) {
+        return;
+    }
+    if (!helpers_1.isObject(parsed) ||
+        typeof parsed["message"] !== "string" ||
+        !isAPIErrorCode(parsed["code"])) {
+        return;
+    }
+    return {
+        ...parsed,
+        code: parsed["code"],
+        message: parsed["message"],
+    };
+}
+function isAPIErrorCode(code) {
+    return typeof code === "string" && code in apiErrorCodes;
+}
+//# sourceMappingURL=errors.js.map
+
+/***/ }),
+
+/***/ 8002:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.isObject = exports.pick = exports.assertNever = void 0;
+/**
+ * Utility for enforcing exhaustiveness checks in the type system.
+ *
+ * @see https://basarat.gitbook.io/typescript/type-system/discriminated-unions#throw-in-exhaustive-checks
+ *
+ * @param value The variable with no remaining values
+ */
+function assertNever(value) {
+    throw new Error(`Unexpected value should never occur: ${value}`);
+}
+exports.assertNever = assertNever;
+function pick(base, keys) {
+    const entries = keys.map(key => [key, base === null || base === void 0 ? void 0 : base[key]]);
+    return Object.fromEntries(entries);
+}
+exports.pick = pick;
+function isObject(o) {
+    return typeof o === "object" && o !== null;
+}
+exports.isObject = isObject;
+//# sourceMappingURL=helpers.js.map
+
+/***/ }),
+
+/***/ 7946:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.isNotionClientError = exports.RequestTimeoutError = exports.UnknownHTTPResponseError = exports.APIResponseError = exports.ClientErrorCode = exports.APIErrorCode = exports.LogLevel = exports.Client = void 0;
+var Client_1 = __nccwpck_require__(3466);
+Object.defineProperty(exports, "Client", ({ enumerable: true, get: function () { return Client_1.default; } }));
+var logging_1 = __nccwpck_require__(2230);
+Object.defineProperty(exports, "LogLevel", ({ enumerable: true, get: function () { return logging_1.LogLevel; } }));
+var errors_1 = __nccwpck_require__(7787);
+Object.defineProperty(exports, "APIErrorCode", ({ enumerable: true, get: function () { return errors_1.APIErrorCode; } }));
+Object.defineProperty(exports, "ClientErrorCode", ({ enumerable: true, get: function () { return errors_1.ClientErrorCode; } }));
+Object.defineProperty(exports, "APIResponseError", ({ enumerable: true, get: function () { return errors_1.APIResponseError; } }));
+Object.defineProperty(exports, "UnknownHTTPResponseError", ({ enumerable: true, get: function () { return errors_1.UnknownHTTPResponseError; } }));
+Object.defineProperty(exports, "RequestTimeoutError", ({ enumerable: true, get: function () { return errors_1.RequestTimeoutError; } }));
+// Error helpers
+Object.defineProperty(exports, "isNotionClientError", ({ enumerable: true, get: function () { return errors_1.isNotionClientError; } }));
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 2230:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.logLevelSeverity = exports.makeConsoleLogger = exports.LogLevel = void 0;
+const helpers_1 = __nccwpck_require__(8002);
+var LogLevel;
+(function (LogLevel) {
+    LogLevel["DEBUG"] = "debug";
+    LogLevel["INFO"] = "info";
+    LogLevel["WARN"] = "warn";
+    LogLevel["ERROR"] = "error";
+})(LogLevel = exports.LogLevel || (exports.LogLevel = {}));
+function makeConsoleLogger(name) {
+    return (level, message, extraInfo) => {
+        console[level](`${name} ${level}:`, message, extraInfo);
+    };
+}
+exports.makeConsoleLogger = makeConsoleLogger;
+/**
+ * Transforms a log level into a comparable (numerical) value ordered by severity.
+ */
+function logLevelSeverity(level) {
+    switch (level) {
+        case LogLevel.DEBUG:
+            return 20;
+        case LogLevel.INFO:
+            return 40;
+        case LogLevel.WARN:
+            return 60;
+        case LogLevel.ERROR:
+            return 80;
+        default:
+            return helpers_1.assertNever(level);
+    }
+}
+exports.logLevelSeverity = logLevelSeverity;
+//# sourceMappingURL=logging.js.map
+
+/***/ }),
+
+/***/ 9820:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -1553,7 +2406,7 @@ exports.createTokenAuth = createTokenAuth;
 
 /***/ }),
 
-/***/ 6762:
+/***/ 5251:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -1561,11 +2414,11 @@ exports.createTokenAuth = createTokenAuth;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
-var universalUserAgent = __nccwpck_require__(5030);
-var beforeAfterHook = __nccwpck_require__(3682);
-var request = __nccwpck_require__(6234);
-var graphql = __nccwpck_require__(8467);
-var authToken = __nccwpck_require__(334);
+var universalUserAgent = __nccwpck_require__(7259);
+var beforeAfterHook = __nccwpck_require__(7654);
+var request = __nccwpck_require__(8069);
+var graphql = __nccwpck_require__(324);
+var authToken = __nccwpck_require__(9820);
 
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
@@ -1737,7 +2590,7 @@ exports.Octokit = Octokit;
 
 /***/ }),
 
-/***/ 9440:
+/***/ 3683:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -1745,8 +2598,8 @@ exports.Octokit = Octokit;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
-var isPlainObject = __nccwpck_require__(3287);
-var universalUserAgent = __nccwpck_require__(5030);
+var isPlainObject = __nccwpck_require__(5349);
+var universalUserAgent = __nccwpck_require__(7259);
 
 function lowercaseKeys(object) {
   if (!object) {
@@ -2135,7 +2988,7 @@ exports.endpoint = endpoint;
 
 /***/ }),
 
-/***/ 8467:
+/***/ 324:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -2143,8 +2996,8 @@ exports.endpoint = endpoint;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
-var request = __nccwpck_require__(6234);
-var universalUserAgent = __nccwpck_require__(5030);
+var request = __nccwpck_require__(8069);
+var universalUserAgent = __nccwpck_require__(7259);
 
 const VERSION = "4.8.0";
 
@@ -2261,7 +3114,7 @@ exports.withCustomRequest = withCustomRequest;
 
 /***/ }),
 
-/***/ 4193:
+/***/ 6647:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2486,7 +3339,7 @@ exports.paginatingEndpoints = paginatingEndpoints;
 
 /***/ }),
 
-/***/ 3044:
+/***/ 1492:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3519,7 +4372,7 @@ exports.restEndpointMethods = restEndpointMethods;
 
 /***/ }),
 
-/***/ 537:
+/***/ 5032:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -3529,8 +4382,8 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var deprecation = __nccwpck_require__(8932);
-var once = _interopDefault(__nccwpck_require__(1223));
+var deprecation = __nccwpck_require__(6962);
+var once = _interopDefault(__nccwpck_require__(5847));
 
 const logOnceCode = once(deprecation => console.warn(deprecation));
 const logOnceHeaders = once(deprecation => console.warn(deprecation));
@@ -3601,7 +4454,7 @@ exports.RequestError = RequestError;
 
 /***/ }),
 
-/***/ 6234:
+/***/ 8069:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -3611,11 +4464,11 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var endpoint = __nccwpck_require__(9440);
-var universalUserAgent = __nccwpck_require__(5030);
-var isPlainObject = __nccwpck_require__(3287);
-var nodeFetch = _interopDefault(__nccwpck_require__(467));
-var requestError = __nccwpck_require__(537);
+var endpoint = __nccwpck_require__(3683);
+var universalUserAgent = __nccwpck_require__(7259);
+var isPlainObject = __nccwpck_require__(5349);
+var nodeFetch = _interopDefault(__nccwpck_require__(7636));
+var requestError = __nccwpck_require__(5032);
 
 const VERSION = "5.6.2";
 
@@ -3786,12 +4639,12 @@ exports.request = request;
 
 /***/ }),
 
-/***/ 3682:
+/***/ 7654:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var register = __nccwpck_require__(4670)
-var addHook = __nccwpck_require__(5549)
-var removeHook = __nccwpck_require__(6819)
+var register = __nccwpck_require__(6367)
+var addHook = __nccwpck_require__(8840)
+var removeHook = __nccwpck_require__(7381)
 
 // bind with array of arguments: https://stackoverflow.com/a/21792913
 var bind = Function.bind
@@ -3850,7 +4703,7 @@ module.exports.Collection = Hook.Collection
 
 /***/ }),
 
-/***/ 5549:
+/***/ 8840:
 /***/ ((module) => {
 
 module.exports = addHook;
@@ -3903,7 +4756,7 @@ function addHook(state, kind, name, hook) {
 
 /***/ }),
 
-/***/ 4670:
+/***/ 6367:
 /***/ ((module) => {
 
 module.exports = register;
@@ -3937,7 +4790,7 @@ function register(state, name, method, options) {
 
 /***/ }),
 
-/***/ 6819:
+/***/ 7381:
 /***/ ((module) => {
 
 module.exports = removeHook;
@@ -3963,7 +4816,7 @@ function removeHook(state, name, method) {
 
 /***/ }),
 
-/***/ 8932:
+/***/ 6962:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3991,7 +4844,7 @@ exports.Deprecation = Deprecation;
 
 /***/ }),
 
-/***/ 3287:
+/***/ 5349:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -4037,7 +4890,7 @@ exports.isPlainObject = isPlainObject;
 
 /***/ }),
 
-/***/ 467:
+/***/ 7636:
 /***/ ((module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -4050,7 +4903,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var Stream = _interopDefault(__nccwpck_require__(2781));
 var http = _interopDefault(__nccwpck_require__(3685));
 var Url = _interopDefault(__nccwpck_require__(7310));
-var whatwgUrl = _interopDefault(__nccwpck_require__(8665));
+var whatwgUrl = _interopDefault(__nccwpck_require__(8404));
 var https = _interopDefault(__nccwpck_require__(5687));
 var zlib = _interopDefault(__nccwpck_require__(9796));
 
@@ -4203,7 +5056,7 @@ FetchError.prototype.name = 'FetchError';
 
 let convert;
 try {
-	convert = (__nccwpck_require__(2877).convert);
+	convert = (__nccwpck_require__(9968).convert);
 } catch (e) {}
 
 const INTERNALS = Symbol('Body internals');
@@ -5716,10 +6569,10 @@ exports.FetchError = FetchError;
 
 /***/ }),
 
-/***/ 1223:
+/***/ 5847:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var wrappy = __nccwpck_require__(2940)
+var wrappy = __nccwpck_require__(433)
 module.exports = wrappy(once)
 module.exports.strict = wrappy(onceStrict)
 
@@ -5765,7 +6618,7 @@ function onceStrict (fn) {
 
 /***/ }),
 
-/***/ 4256:
+/***/ 3068:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
@@ -5966,15 +6819,15 @@ module.exports.PROCESSING_OPTIONS = PROCESSING_OPTIONS;
 
 /***/ }),
 
-/***/ 4294:
+/***/ 7931:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = __nccwpck_require__(4219);
+module.exports = __nccwpck_require__(8822);
 
 
 /***/ }),
 
-/***/ 4219:
+/***/ 8822:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -6246,7 +7099,7 @@ exports.debug = debug; // for test
 
 /***/ }),
 
-/***/ 5030:
+/***/ 7259:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -6272,7 +7125,7 @@ exports.getUserAgent = getUserAgent;
 
 /***/ }),
 
-/***/ 4886:
+/***/ 5071:
 /***/ ((module) => {
 
 "use strict";
@@ -6469,12 +7322,12 @@ conversions["RegExp"] = function (V, opts) {
 
 /***/ }),
 
-/***/ 7537:
+/***/ 1653:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
-const usm = __nccwpck_require__(2158);
+const usm = __nccwpck_require__(1994);
 
 exports.implementation = class URLImpl {
   constructor(constructorArgs) {
@@ -6677,15 +7530,15 @@ exports.implementation = class URLImpl {
 
 /***/ }),
 
-/***/ 3394:
+/***/ 4658:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-const conversions = __nccwpck_require__(4886);
-const utils = __nccwpck_require__(3185);
-const Impl = __nccwpck_require__(7537);
+const conversions = __nccwpck_require__(5071);
+const utils = __nccwpck_require__(1157);
+const Impl = __nccwpck_require__(1653);
 
 const impl = utils.implSymbol;
 
@@ -6881,32 +7734,32 @@ module.exports = {
 
 /***/ }),
 
-/***/ 8665:
+/***/ 8404:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-exports.URL = __nccwpck_require__(3394)["interface"];
-exports.serializeURL = __nccwpck_require__(2158).serializeURL;
-exports.serializeURLOrigin = __nccwpck_require__(2158).serializeURLOrigin;
-exports.basicURLParse = __nccwpck_require__(2158).basicURLParse;
-exports.setTheUsername = __nccwpck_require__(2158).setTheUsername;
-exports.setThePassword = __nccwpck_require__(2158).setThePassword;
-exports.serializeHost = __nccwpck_require__(2158).serializeHost;
-exports.serializeInteger = __nccwpck_require__(2158).serializeInteger;
-exports.parseURL = __nccwpck_require__(2158).parseURL;
+exports.URL = __nccwpck_require__(4658)["interface"];
+exports.serializeURL = __nccwpck_require__(1994).serializeURL;
+exports.serializeURLOrigin = __nccwpck_require__(1994).serializeURLOrigin;
+exports.basicURLParse = __nccwpck_require__(1994).basicURLParse;
+exports.setTheUsername = __nccwpck_require__(1994).setTheUsername;
+exports.setThePassword = __nccwpck_require__(1994).setThePassword;
+exports.serializeHost = __nccwpck_require__(1994).serializeHost;
+exports.serializeInteger = __nccwpck_require__(1994).serializeInteger;
+exports.parseURL = __nccwpck_require__(1994).parseURL;
 
 
 /***/ }),
 
-/***/ 2158:
+/***/ 1994:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 const punycode = __nccwpck_require__(5477);
-const tr46 = __nccwpck_require__(4256);
+const tr46 = __nccwpck_require__(3068);
 
 const specialSchemes = {
   ftp: 21,
@@ -8205,7 +9058,7 @@ module.exports.parseURL = function (input, options) {
 
 /***/ }),
 
-/***/ 3185:
+/***/ 1157:
 /***/ ((module) => {
 
 "use strict";
@@ -8233,7 +9086,7 @@ module.exports.implForWrapper = function (wrapper) {
 
 /***/ }),
 
-/***/ 2940:
+/***/ 433:
 /***/ ((module) => {
 
 // Returns a wrapper function that returns a wrapped callback
@@ -8273,7 +9126,7 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
-/***/ 2877:
+/***/ 9968:
 /***/ ((module) => {
 
 module.exports = eval("require")("encoding");
@@ -8393,6 +9246,14 @@ module.exports = require("zlib");
 
 /***/ }),
 
+/***/ 3797:
+/***/ ((module) => {
+
+"use strict";
+module.exports = JSON.parse('{"name":"@notionhq/client","version":"0.4.11","description":"A simple and easy to use client for the Notion API","engines":{"node":">=12"},"homepage":"https://developers.notion.com/docs/getting-started","bugs":{"url":"https://github.com/makenotion/notion-sdk-js/issues"},"repository":{"type":"git","url":"https://github.com/makenotion/notion-sdk-js/"},"keywords":["notion","notionapi","rest","notion-api"],"main":"./build/src","scripts":{"prepare":"npm run build","prepublishOnly":"npm run checkLoggedIn && npm run lint && npm run test","build":"tsc","prettier":"prettier --write .","lint":"prettier --check . && eslint . --ext .ts && cspell \'**/*\' ","test":"ava","check-links":"git ls-files | grep md$ | xargs -n 1 markdown-link-check","prebuild":"npm run clean","clean":"rm -rf ./build","checkLoggedIn":"./scripts/verifyLoggedIn.sh"},"author":"","license":"MIT","files":["build/package.json","build/src/**"],"dependencies":{"@types/node-fetch":"^2.5.10","node-fetch":"^2.6.1"},"devDependencies":{"@ava/typescript":"^2.0.0","@typescript-eslint/eslint-plugin":"^4.22.0","@typescript-eslint/parser":"^4.22.0","ava":"^3.15.0","cspell":"^5.4.1","eslint":"^7.24.0","markdown-link-check":"^3.8.7","prettier":"^2.3.0","typescript":"^4.2.4"}}');
+
+/***/ }),
+
 /***/ 2020:
 /***/ ((module) => {
 
@@ -8442,16 +9303,59 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-const core = __nccwpck_require__(2186);
-const github = __nccwpck_require__(5438);
+const core = __nccwpck_require__(272);
+const github = __nccwpck_require__(1728);
+const { Client, LogLevel } = __nccwpck_require__(7946)
 
 try {
   // `who-to-greet` input defined in action metadata file
   const body = core.getInput('body');
   const token = core.getInput('token');
   const database = core.getInput('database');
-  console.log(`${body} ${token} ${database}`);  
-  core.setOutput("status", "complete");
+
+  core.debug(`Creating notion client ...`)
+  const notion = new Client({
+	  auth: token,
+	  logLevel: LogLevel.ERROR
+  });
+  
+  core.debug(`Creating page ...`)
+  notion.pages.create({
+    parent: {      
+      database_id: database,  
+    },
+    properties: {
+      Name: {
+        title: [
+          {
+            text: {
+              content: 'Release',
+            },
+          },
+        ],
+      },
+  	},
+  	children: [
+      {
+        object: 'block',
+        type: 'paragraph',
+        paragraph: {
+          text: [
+            {
+              type: 'text',
+              text: {
+                content: body,
+              },
+            },
+          ],
+        },
+      },
+     ],
+  }).then((result) => {
+  	core.debug(`${result}`)
+  	core.setOutput("status", "complete");	
+  });
+ 
 } catch (error) {
   core.setFailed(error.message);
 }
