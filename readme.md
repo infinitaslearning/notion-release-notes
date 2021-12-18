@@ -26,7 +26,14 @@ And each actual page contains whatever your release notes are:
 
 ## Usage
 
-```
+Typically this is used with a changelog builder:
+
+```yaml
+- name: Release Changelog Builder
+    uses: mikepenz/release-changelog-builder-action@v2.7.1
+    id: build_changelog
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   
 - name: Notion release notes        
   uses: infinitaslearning/notion-release-notes@main        
   with:          
@@ -42,5 +49,4 @@ To get the database ID, simply browse to it, click on the '...' and get a 'Copy 
 ## Development
 
 Assumes you have `@vercel/ncc` installed globally.
-
-After changes ensure you `npm run build` and then push.
+After changes ensure you `npm run build`, commit and then submit a PR.
