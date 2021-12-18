@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const { Client, LogLevel } = require('@notionhq/client')
+const { markdownToBlocks } = require('@tryfabric/martian')
 
 try {
   // `who-to-greet` input defined in action metadata file
@@ -14,6 +15,8 @@ try {
 	  logLevel: LogLevel.ERROR
   });
   
+  const blocks = markdownToBlocks(body);
+
   core.debug(`Creating page ...`)
   notion.pages.create({
     parent: {      
@@ -30,22 +33,7 @@ try {
         ],
       },
   	},
-  	children: [
-      {
-        object: 'block',
-        type: 'paragraph',
-        paragraph: {
-          text: [
-            {
-              type: 'text',
-              text: {
-                content: body,
-              },
-            },
-          ],
-        },
-      },
-     ],
+  	children: blocks,
   }).then((result) => {
   	core.debug(`${result}`)
   	core.setOutput("status", "complete");	
