@@ -4,9 +4,9 @@ This action allows you to specify an existing database in your Notion account th
 
 Typically used alongside https://github.com/mikepenz/release-changelog-builder-action
 
-## Notion token
+## Notion integration and token
 
-You need to have set `env.NOTION_TOKEN` - which you can get from https://www.notion.so/my-integrations after creating an integration.
+You need to have an integration access token - which you can get from https://www.notion.so/my-integrations after creating an integration.
 
 ## Notion Database
 
@@ -15,6 +15,8 @@ This action expects a Notion database with the following properties:
 Name: text
 Date: date
 Tags: tags
+
+Note that you *must* share your database with the integration you created earlier to be able to access it!
 
 It can look like this:
 
