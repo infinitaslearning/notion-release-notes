@@ -20,6 +20,10 @@ It can look like this:
 
 <img width="981" alt="Screenshot 2021-12-18 at 08 55 42" src="https://user-images.githubusercontent.com/239305/146633970-5e1baaf8-6457-4664-b56c-284355e3b241.png">
 
+And each actual page contains whatever your release notes are:
+
+<img width="765" alt="Screenshot 2021-12-18 at 08 56 44" src="https://user-images.githubusercontent.com/239305/146633996-116ff1af-5fe7-4642-ab65-3c0f6ccedf1e.png">
+
 ## Usage
 
 ```
