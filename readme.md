@@ -8,7 +8,7 @@ This would typically be used alongside https://github.com/mikepenz/release-chang
 
 First, you need to have an integration access token - which you can get from https://www.notion.so/my-integrations after creating an integration.  Give the integration a friendly name like 'Github Action Release Notes'.
 
-By default integrations cant access any contentm so you you *must* share your database with the integration you created earlier to be able to access it!
+By default integrations cant access any content so you you *must* share your database with the integration you created earlier to be able to access it!
 
 ## Notion Database
 
@@ -17,6 +17,8 @@ This action expects a Notion database with the following properties:
   - Name: text
   - Date: date
   - Tags: tags
+
+You can use the following template and duplicate it: https://infinitaslearning.notion.site/Notion-Release-Notes-a97bedb581464a3ea24159d8eac576c0
 
 It can look like this:
 
@@ -50,5 +52,5 @@ To get the database ID, simply browse to it, click on the '...' and get a 'Copy 
 
 ## Development
 
-Assumes you have `@vercel/ncc` installed globally.
+Assumes you have `@vercel/ncc` installed globally, you need a `NOTION_TOKEN` in your environment for the tests to pass.
 After changes ensure you `npm run build`, commit and then submit a PR.

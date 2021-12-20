@@ -1,7 +1,8 @@
 name: 'Notion release notes'
 description: 'Creates a new page in an existing database to capture release notes'
-icon: type
-color: green
+branding:
+  icon: type
+  color: green
 inputs:
   token:
     description: 'Notion API token'
