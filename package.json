@@ -10,14 +10,18 @@
     "lint": "eslint src",
     "fix": "eslint --fix src"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "notion",
+    "markdown",
+    "release-notes"
+  ],
+  "author": "Josh Potts",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.9.1",
     "@actions/github": "^5.0.0",
-    "@notionhq/client": "^0.4.11",
-    "@tryfabric/martian": "^1.1.1"
+    "@notionhq/client": "^2.2.5",
+    "@tryfabric/martian": "^1.2.4"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
