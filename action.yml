@@ -1,5 +1,5 @@
-name: 'Notion release notes'
-description: 'Creates a new page in an existing database to capture release notes'
+name: 'Notion create page from markdown file'
+description: 'Creates a new page in an existing database to capture content of a markdown file'
 branding:
   icon: type
   color: green
@@ -13,15 +13,12 @@ inputs:
   name:  
     description: 'Name for the release'
     required: true
-  body:  
-    description: 'Body content for release notes'
+  filepath:  
+    description: 'The path to the file to add to Notion' 
     required: true
-  tags:  
-    description: 'Comma separated tag list'
-    required: false
 outputs:
   status: 
     description: 'The status of the update'
 runs:
-  using: 'node12'
+  using: 'node18'
   main: 'dist/index.js'

@@ -1,6 +1,6 @@
 # Notion Release Notes
 
-[![CodeQL](https://github.com/infinitaslearning/notion-release-notes/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/infinitaslearning/notion-release-notes/actions/workflows/codeql-analysis.yml)
+[![CodeQL](https://github.com/jlpdeveloper/notion-markdown-creator/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/jlpdeveloper/notion-markdown-creator/actions/workflows/codeql-analysis.yml)
 
 This action allows you to specify an existing database in your Notion workspace, and create a new entry each time your action runs.  This is currently specifically aimed at release notes, but could be used for a more generic purpose if you like, fields are kept purposefully quite generic.
 

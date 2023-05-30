@@ -1,54 +1,51 @@
 const core = require('@actions/core')
 const { Client, LogLevel } = require('@notionhq/client')
 const { markdownToBlocks } = require('@tryfabric/martian')
+const fs = require('fs');
 
 try {
   // `who-to-greet` input defined in action metadata file
-  const body = core.getInput('body')
+  const filepath = core.getInput('filepath')
   const name = core.getInput('name')
   const token = core.getInput('token')
-  const tags = core.getInput('tags') || ''
+
   const database = core.getInput('database')
-  const date = new Date().toISOString()
 
   core.debug('Creating notion client ...')
   const notion = new Client({
     auth: token,
     logLevel: LogLevel.ERROR
   })
+  fs.readFile(filepath, 'utf-8', (err, data)=>{
+    if(err){
+      core.setFailed(err.message);
+      return;
+    }
+    const blocks = markdownToBlocks(data)
 
-  const blocks = markdownToBlocks(body)
-  const tagArray = tags ? tags.split(',').flatMap(tag => { return { name: tag } }) : []
-
-  core.debug('Creating page ...')
-  notion.pages.create({
-    parent: {
-      database_id: database
-    },
-    properties: {
-      Name: {
-        title: [
-          {
-            text: {
-              content: name
-            }
-          }
-        ]
+    core.info('Creating page ...')
+    notion.pages.create({
+      parent: {
+        database_id: database
       },
-      Date: {
-        date: {
-          start: date
+      properties: {
+        Name: {
+          title: [
+            {
+              text: {
+                content: name
+              }
+            }
+          ]
         }
       },
-      Tags: {
-        multi_select: tagArray
-      }
-    },
-    children: blocks
-  }).then((result) => {
-    core.debug(`${result}`)
-    core.setOutput('status', 'complete')
-  })
+      children: blocks
+    }).then((result) => {
+      core.debug(`${JSON.stringify(result, null, 4)}`)
+      core.info('Successfully added Notion Page');
+    });
+  }); 
+  
 } catch (error) {
   core.setFailed(error.message)
 }
