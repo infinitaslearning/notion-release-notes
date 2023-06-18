@@ -26,7 +26,7 @@ This action expects a Notion database with the following properties:
 Typically this is used with a changelog builder:
 
 ```yaml
- 
+- uses: actions/checkout@v3
 - name: Notion release notes        
   uses: jlpdeveloper/notion-markdown-creator@latest        
   with:          

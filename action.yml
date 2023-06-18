@@ -20,5 +20,5 @@ outputs:
   status: 
     description: 'The status of the update'
 runs:
-  using: 'node18'
+  using: 'node16'
   main: 'dist/index.js'
