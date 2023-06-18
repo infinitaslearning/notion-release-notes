@@ -17,6 +17,9 @@ try {
     logLevel: LogLevel.ERROR
   })
   core.info(process.cwd());
+  fs.readdirSync(process.cwd()).forEach(file => {
+    core.info(file);
+  });
   fs.readFile(filepath, 'utf-8', (err, data)=>{
     if(err){
       core.setFailed(err.message);
