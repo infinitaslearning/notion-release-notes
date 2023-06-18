@@ -13,7 +13,7 @@ jobs:
               with:          
                 token: ${{ secrets.NOTION_TOKEN }}
                 database: ${{ secrets.NOTION_DATABASE }}
-                name: Super Amazing Service    
+                name: Super Amazing Service inline
                 filepath: |
                     # A Notion Doc from inline content
 
