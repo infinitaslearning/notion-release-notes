@@ -7,6 +7,7 @@ jobs:
     notion: 
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v3
             - name: Notion release notes        
               uses: jlpdeveloper/notion-markdown-creator@517b18f9d02569da93c9bca4d8122f02c33a27af
               with:          
