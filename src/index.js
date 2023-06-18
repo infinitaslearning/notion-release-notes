@@ -16,6 +16,7 @@ try {
     auth: token,
     logLevel: LogLevel.ERROR
   })
+  core.info(process.cwd());
   fs.readFile(filepath, 'utf-8', (err, data)=>{
     if(err){
       core.setFailed(err.message);
