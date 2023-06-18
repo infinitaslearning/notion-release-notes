@@ -9,7 +9,7 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - name: Notion release notes        
-              uses: jlpdeveloper/notion-markdown-creator@5f2497d642181adc150b619dfdaa6b5cfb1a46d8
+              uses: jlpdeveloper/notion-markdown-creator@f4aac278584b3f03e6b22aa31bc2bf8c00d7f04e
               with:          
                 token: ${{ secrets.NOTION_TOKEN }}
                 database: ${{ secrets.NOTION_DATABASE }}
