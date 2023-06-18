@@ -21,7 +21,10 @@ try {
       core.setFailed(err.message);
       return;
     }
+    core.info('data:' + data);
     const blocks = markdownToBlocks(data)
+    console.log(JSON.stringify(blocks));
+    console.log('test');
     core.info('blocks: ' + JSON.stringify(blocks, null, 4));
     core.info('Creating page ...')
     notion.pages.create({
