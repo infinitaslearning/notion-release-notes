@@ -20480,6 +20480,7 @@ const core = __nccwpck_require__(1863)
 const { Client, LogLevel } = __nccwpck_require__(6851)
 const { markdownToBlocks } = __nccwpck_require__(3580)
 const fs = __nccwpck_require__(7147);
+let notion = {};
 
 try {
   // `who-to-greet` input defined in action metadata file
@@ -20490,7 +20491,7 @@ try {
   const database = core.getInput('database')
 
   core.debug('Creating notion client ...')
-  const notion = new Client({
+  notion = new Client({
     auth: token,
     logLevel: LogLevel.ERROR
   });
@@ -20501,12 +20502,20 @@ try {
         core.setFailed(err.message);
         return;
       }
-      addToNotion(data, name, database);
+      addToNotion({
+        content: data,
+        name: name,
+        database: database
+      });
 
     }); 
   }
   else{
-    addToNotion(filepath, name, database);
+    addToNotion({
+      content: filepath,
+      name: name,
+      database: database
+    });
   }
   
 } catch (error) {
@@ -20514,21 +20523,21 @@ try {
 }
 
 
-function addToNotion(data, name, database){
-  const blocks = markdownToBlocks(data)
+function addToNotion(data){
+  const blocks = markdownToBlocks(data.content)
    
   core.debug('blocks: ' + JSON.stringify(blocks, null, 4));
   core.info('Creating page ...')
   notion.pages.create({
     parent: {
-      database_id: database
+      database_id: data.database
     },
     properties: {
       Name: {
         title: [
           {
             text: {
-              content: name
+              content: data.name
             }
           }
         ]

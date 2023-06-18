@@ -2,6 +2,7 @@ const core = require('@actions/core')
 const { Client, LogLevel } = require('@notionhq/client')
 const { markdownToBlocks } = require('@tryfabric/martian')
 const fs = require('fs');
+let notion = {};
 
 try {
   // `who-to-greet` input defined in action metadata file
@@ -12,7 +13,7 @@ try {
   const database = core.getInput('database')
 
   core.debug('Creating notion client ...')
-  const notion = new Client({
+  notion = new Client({
     auth: token,
     logLevel: LogLevel.ERROR
   });
@@ -23,12 +24,20 @@ try {
         core.setFailed(err.message);
         return;
       }
-      addToNotion(data, name, database);
+      addToNotion({
+        content: data,
+        name: name,
+        database: database
+      });
 
     }); 
   }
   else{
-    addToNotion(filepath, name, database);
+    addToNotion({
+      content: filepath,
+      name: name,
+      database: database
+    });
   }
   
 } catch (error) {
@@ -36,21 +45,21 @@ try {
 }
 
 
-function addToNotion(data, name, database){
-  const blocks = markdownToBlocks(data)
+function addToNotion(data){
+  const blocks = markdownToBlocks(data.content)
    
   core.debug('blocks: ' + JSON.stringify(blocks, null, 4));
   core.info('Creating page ...')
   notion.pages.create({
     parent: {
-      database_id: database
+      database_id: data.database
     },
     properties: {
       Name: {
         title: [
           {
             text: {
-              content: name
+              content: data.name
             }
           }
         ]
