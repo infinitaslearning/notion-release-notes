@@ -8,7 +8,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Notion release notes        
-              uses: jlpdeveloper/notion-markdown-creator@af63b28b4a741d1c4f645d417d855e076ae4d14c
+              uses: jlpdeveloper/notion-markdown-creator@2f1cf15c77def3dd0030e332a70882b08e79c66b
               with:          
                 token: ${{ secrets.NOTION_TOKEN }}
                 database: ${{ secrets.NOTION_DATABASE }}
