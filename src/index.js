@@ -22,7 +22,7 @@ try {
       return;
     }
     const blocks = markdownToBlocks(data)
-
+    core.info('blocks: ' + JSON.stringify(blocks, null, 4));
     core.info('Creating page ...')
     notion.pages.create({
       parent: {
