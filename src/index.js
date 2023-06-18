@@ -16,6 +16,7 @@ try {
     auth: token,
     logLevel: LogLevel.ERROR
   })
+  core.info('Hellow world');
   core.info(process.cwd());
   fs.readdirSync(process.cwd()).forEach(file => {
     core.info(file);
