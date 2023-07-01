@@ -140,7 +140,6 @@ const file_command_1 = __nccwpck_require__(6885);
 const utils_1 = __nccwpck_require__(3365);
 const os = __importStar(__nccwpck_require__(2037));
 const path = __importStar(__nccwpck_require__(1017));
-const uuid_1 = __nccwpck_require__(3633);
 const oidc_utils_1 = __nccwpck_require__(3985);
 /**
  * The code to exit an action
@@ -170,20 +169,9 @@ function exportVariable(name, val) {
     process.env[name] = convertedVal;
     const filePath = process.env['GITHUB_ENV'] || '';
     if (filePath) {
-        const delimiter = `ghadelimiter_${uuid_1.v4()}`;
-        // These should realistically never happen, but just in case someone finds a way to exploit uuid generation let's not allow keys or values that contain the delimiter.
-        if (name.includes(delimiter)) {
-            throw new Error(`Unexpected input: name should not contain the delimiter "${delimiter}"`);
-        }
-        if (convertedVal.includes(delimiter)) {
-            throw new Error(`Unexpected input: value should not contain the delimiter "${delimiter}"`);
-        }
-        const commandValue = `${name}<<${delimiter}${os.EOL}${convertedVal}${os.EOL}${delimiter}`;
-        file_command_1.issueCommand('ENV', commandValue);
+        return file_command_1.issueFileCommand('ENV', file_command_1.prepareKeyValueMessage(name, val));
     }
-    else {
-        command_1.issueCommand('set-env', { name }, convertedVal);
-    }
+    command_1.issueCommand('set-env', { name }, convertedVal);
 }
 exports.exportVariable = exportVariable;
 /**
@@ -201,7 +189,7 @@ exports.setSecret = setSecret;
 function addPath(inputPath) {
     const filePath = process.env['GITHUB_PATH'] || '';
     if (filePath) {
-        file_command_1.issueCommand('PATH', inputPath);
+        file_command_1.issueFileCommand('PATH', inputPath);
     }
     else {
         command_1.issueCommand('add-path', {}, inputPath);
@@ -241,7 +229,10 @@ function getMultilineInput(name, options) {
     const inputs = getInput(name, options)
         .split('\n')
         .filter(x => x !== '');
-    return inputs;
+    if (options && options.trimWhitespace === false) {
+        return inputs;
+    }
+    return inputs.map(input => input.trim());
 }
 exports.getMultilineInput = getMultilineInput;
 /**
@@ -274,8 +265,12 @@ exports.getBooleanInput = getBooleanInput;
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function setOutput(name, value) {
+    const filePath = process.env['GITHUB_OUTPUT'] || '';
+    if (filePath) {
+        return file_command_1.issueFileCommand('OUTPUT', file_command_1.prepareKeyValueMessage(name, value));
+    }
     process.stdout.write(os.EOL);
-    command_1.issueCommand('set-output', { name }, value);
+    command_1.issueCommand('set-output', { name }, utils_1.toCommandValue(value));
 }
 exports.setOutput = setOutput;
 /**
@@ -404,7 +399,11 @@ exports.group = group;
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function saveState(name, value) {
-    command_1.issueCommand('save-state', { name }, value);
+    const filePath = process.env['GITHUB_STATE'] || '';
+    if (filePath) {
+        return file_command_1.issueFileCommand('STATE', file_command_1.prepareKeyValueMessage(name, value));
+    }
+    command_1.issueCommand('save-state', { name }, utils_1.toCommandValue(value));
 }
 exports.saveState = saveState;
 /**
@@ -470,13 +469,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.issueCommand = void 0;
+exports.prepareKeyValueMessage = exports.issueFileCommand = void 0;
 // We use any as a valid input type
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const fs = __importStar(__nccwpck_require__(7147));
 const os = __importStar(__nccwpck_require__(2037));
+const uuid_1 = __nccwpck_require__(3633);
 const utils_1 = __nccwpck_require__(3365);
-function issueCommand(command, message) {
+function issueFileCommand(command, message) {
     const filePath = process.env[`GITHUB_${command}`];
     if (!filePath) {
         throw new Error(`Unable to find environment variable for file command ${command}`);
@@ -488,7 +488,22 @@ function issueCommand(command, message) {
         encoding: 'utf8'
     });
 }
-exports.issueCommand = issueCommand;
+exports.issueFileCommand = issueFileCommand;
+function prepareKeyValueMessage(key, value) {
+    const delimiter = `ghadelimiter_${uuid_1.v4()}`;
+    const convertedValue = utils_1.toCommandValue(value);
+    // These should realistically never happen, but just in case someone finds a
+    // way to exploit uuid generation let's not allow keys or values that contain
+    // the delimiter.
+    if (key.includes(delimiter)) {
+        throw new Error(`Unexpected input: name should not contain the delimiter "${delimiter}"`);
+    }
+    if (convertedValue.includes(delimiter)) {
+        throw new Error(`Unexpected input: value should not contain the delimiter "${delimiter}"`);
+    }
+    return `${key}<<${delimiter}${os.EOL}${convertedValue}${os.EOL}${delimiter}`;
+}
+exports.prepareKeyValueMessage = prepareKeyValueMessage;
 //# sourceMappingURL=file-command.js.map
 
 /***/ }),
@@ -509,8 +524,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.OidcClient = void 0;
-const http_client_1 = __nccwpck_require__(3600);
-const auth_1 = __nccwpck_require__(5542);
+const http_client_1 = __nccwpck_require__(1386);
+const auth_1 = __nccwpck_require__(2402);
 const core_1 = __nccwpck_require__(1863);
 class OidcClient {
     static createHttpClient(allowRetry = true, maxRetry = 10) {
@@ -979,7 +994,7 @@ exports.toCommandProperties = toCommandProperties;
 
 /***/ }),
 
-/***/ 5542:
+/***/ 2402:
 /***/ (function(__unused_webpack_module, exports) {
 
 "use strict";
@@ -1067,7 +1082,7 @@ exports.PersonalAccessTokenCredentialHandler = PersonalAccessTokenCredentialHand
 
 /***/ }),
 
-/***/ 3600:
+/***/ 1386:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -1105,7 +1120,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.HttpClient = exports.isHttps = exports.HttpClientResponse = exports.HttpClientError = exports.getProxyUrl = exports.MediaTypes = exports.Headers = exports.HttpCodes = void 0;
 const http = __importStar(__nccwpck_require__(3685));
 const https = __importStar(__nccwpck_require__(5687));
-const pm = __importStar(__nccwpck_require__(2487));
+const pm = __importStar(__nccwpck_require__(8075));
 const tunnel = __importStar(__nccwpck_require__(3559));
 var HttpCodes;
 (function (HttpCodes) {
@@ -1679,7 +1694,7 @@ const lowercaseKeys = (obj) => Object.keys(obj).reduce((c, k) => ((c[k.toLowerCa
 
 /***/ }),
 
-/***/ 2487:
+/***/ 8075:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -1711,6 +1726,10 @@ function checkBypass(reqUrl) {
     if (!reqUrl.hostname) {
         return false;
     }
+    const reqHost = reqUrl.hostname;
+    if (isLoopbackAddress(reqHost)) {
+        return true;
+    }
     const noProxy = process.env['no_proxy'] || process.env['NO_PROXY'] || '';
     if (!noProxy) {
         return false;
@@ -1736,13 +1755,24 @@ function checkBypass(reqUrl) {
         .split(',')
         .map(x => x.trim().toUpperCase())
         .filter(x => x)) {
-        if (upperReqHosts.some(x => x === upperNoProxyItem)) {
+        if (upperNoProxyItem === '*' ||
+            upperReqHosts.some(x => x === upperNoProxyItem ||
+                x.endsWith(`.${upperNoProxyItem}`) ||
+                (upperNoProxyItem.startsWith('.') &&
+                    x.endsWith(`${upperNoProxyItem}`)))) {
             return true;
         }
     }
     return false;
 }
 exports.checkBypass = checkBypass;
+function isLoopbackAddress(host) {
+    const hostLower = host.toLowerCase();
+    return (hostLower === 'localhost' ||
+        hostLower.startsWith('127.') ||
+        hostLower.startsWith('[::1]') ||
+        hostLower.startsWith('[0:0:0:0:0:0:0:1]'));
+}
 //# sourceMappingURL=proxy.js.map
 
 /***/ }),
@@ -3465,6 +3495,27 @@ function ccount(source, character) {
 
 /***/ }),
 
+/***/ 3664:
+/***/ ((module) => {
+
+"use strict";
+
+
+module.exports = string => {
+	if (typeof string !== 'string') {
+		throw new TypeError('Expected a string');
+	}
+
+	// Escape characters with special meaning either inside or outside character sets.
+	// Use a simple backslash escape when it’s always valid, and a \unnnn escape when the simpler form would be disallowed by Unicode patterns’ stricter grammar.
+	return string
+		.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
+		.replace(/-/g, '\\x2d');
+};
+
+
+/***/ }),
+
 /***/ 3839:
 /***/ ((module) => {
 
@@ -3937,7 +3988,7 @@ module.exports = findAndReplace
 
 var visit = __nccwpck_require__(5917)
 var convert = __nccwpck_require__(9849)
-var escape = __nccwpck_require__(9277)
+var escape = __nccwpck_require__(3664)
 
 var splice = [].splice
 
@@ -4111,27 +4162,6 @@ function toFunction(replace) {
     return replace
   }
 }
-
-
-/***/ }),
-
-/***/ 9277:
-/***/ ((module) => {
-
-"use strict";
-
-
-module.exports = string => {
-	if (typeof string !== 'string') {
-		throw new TypeError('Expected a string');
-	}
-
-	// Escape characters with special meaning either inside or outside character sets.
-	// Use a simple backslash escape when it’s always valid, and a \unnnn escape when the simpler form would be disallowed by Unicode patterns’ stricter grammar.
-	return string
-		.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
-		.replace(/-/g, '\\x2d');
-};
 
 
 /***/ }),
@@ -7700,7 +7730,7 @@ function tokenizeNextPrefixedOrBlank(effects, ok, nok) {
 
 /***/ }),
 
-/***/ 3800:
+/***/ 5542:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 module.exports = __nccwpck_require__(5233)
@@ -7810,7 +7840,7 @@ var combine = __nccwpck_require__(9026)
 var autolink = __nccwpck_require__(5652)
 var strikethrough = __nccwpck_require__(9672)
 var table = __nccwpck_require__(7989)
-var tasklist = __nccwpck_require__(3800)
+var tasklist = __nccwpck_require__(5542)
 
 module.exports = create
 
@@ -15435,6 +15465,20 @@ const isDomainOrSubdomain = function isDomainOrSubdomain(destination, original) 
 };
 
 /**
+ * isSameProtocol reports whether the two provided URLs use the same protocol.
+ *
+ * Both domains must already be in canonical form.
+ * @param {string|URL} original
+ * @param {string|URL} destination
+ */
+const isSameProtocol = function isSameProtocol(destination, original) {
+	const orig = new URL$1(original).protocol;
+	const dest = new URL$1(destination).protocol;
+
+	return orig === dest;
+};
+
+/**
  * Fetch function
  *
  * @param   Mixed    url   Absolute url or Request instance
@@ -15465,7 +15509,7 @@ function fetch(url, opts) {
 			let error = new AbortError('The user aborted a request.');
 			reject(error);
 			if (request.body && request.body instanceof Stream.Readable) {
-				request.body.destroy(error);
+				destroyStream(request.body, error);
 			}
 			if (!response || !response.body) return;
 			response.body.emit('error', error);
@@ -15506,8 +15550,42 @@ function fetch(url, opts) {
 
 		req.on('error', function (err) {
 			reject(new FetchError(`request to ${request.url} failed, reason: ${err.message}`, 'system', err));
+
+			if (response && response.body) {
+				destroyStream(response.body, err);
+			}
+
 			finalize();
 		});
+
+		fixResponseChunkedTransferBadEnding(req, function (err) {
+			if (signal && signal.aborted) {
+				return;
+			}
+
+			if (response && response.body) {
+				destroyStream(response.body, err);
+			}
+		});
+
+		/* c8 ignore next 18 */
+		if (parseInt(process.version.substring(1)) < 14) {
+			// Before Node.js 14, pipeline() does not fully support async iterators and does not always
+			// properly handle when the socket close/end events are out of order.
+			req.on('socket', function (s) {
+				s.addListener('close', function (hadError) {
+					// if a data listener is still present we didn't end cleanly
+					const hasDataListener = s.listenerCount('data') > 0;
+
+					// if end happened before close but the socket didn't emit an error, do it now
+					if (response && hasDataListener && !hadError && !(signal && signal.aborted)) {
+						const err = new Error('Premature close');
+						err.code = 'ERR_STREAM_PREMATURE_CLOSE';
+						response.body.emit('error', err);
+					}
+				});
+			});
+		}
 
 		req.on('response', function (res) {
 			clearTimeout(reqTimeout);
@@ -15580,7 +15658,7 @@ function fetch(url, opts) {
 							size: request.size
 						};
 
-						if (!isDomainOrSubdomain(request.url, locationURL)) {
+						if (!isDomainOrSubdomain(request.url, locationURL) || !isSameProtocol(request.url, locationURL)) {
 							for (const name of ['authorization', 'www-authenticate', 'cookie', 'cookie2']) {
 								requestOpts.headers.delete(name);
 							}
@@ -15673,6 +15751,13 @@ function fetch(url, opts) {
 					response = new Response(body, response_options);
 					resolve(response);
 				});
+				raw.on('end', function () {
+					// some old IIS servers return zero-length OK deflate responses, so 'data' is never emitted.
+					if (!response) {
+						response = new Response(body, response_options);
+						resolve(response);
+					}
+				});
 				return;
 			}
 
@@ -15692,6 +15777,41 @@ function fetch(url, opts) {
 		writeToStream(req, request);
 	});
 }
+function fixResponseChunkedTransferBadEnding(request, errorCallback) {
+	let socket;
+
+	request.on('socket', function (s) {
+		socket = s;
+	});
+
+	request.on('response', function (response) {
+		const headers = response.headers;
+
+		if (headers['transfer-encoding'] === 'chunked' && !headers['content-length']) {
+			response.once('close', function (hadError) {
+				// if a data listener is still present we didn't end cleanly
+				const hasDataListener = socket.listenerCount('data') > 0;
+
+				if (hasDataListener && !hadError) {
+					const err = new Error('Premature close');
+					err.code = 'ERR_STREAM_PREMATURE_CLOSE';
+					errorCallback(err);
+				}
+			});
+		}
+	});
+}
+
+function destroyStream(stream, err) {
+	if (stream.destroy) {
+		stream.destroy(err);
+	} else {
+		// node < 8
+		stream.emit('error', err);
+		stream.end();
+	}
+}
+
 /**
  * Redirect code matching
  *
@@ -20275,6 +20395,107 @@ module.exports.implForWrapper = function (wrapper) {
 
 /***/ }),
 
+/***/ 3297:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+/* The purpose of this function is to take either a string of markdown content or a path to a markdown file,
+ * convert the markdown into blocks for notion, then add that content to notion
+ * Inputs from core:
+ *  filepath: either the relative filepath to a markdown file or a string of markdown content
+ *  name: the name of the notion page to create
+ *  token: the integration token for notion
+ *  database: the guid of the database root page on notion
+ */
+
+const core = __nccwpck_require__(1863)
+const { Client, LogLevel } = __nccwpck_require__(6851)
+const { markdownToBlocks } = __nccwpck_require__(3580)
+const fs = __nccwpck_require__(7147)
+
+// create an empty notion objection
+let notion = {}
+
+function main () {
+  try {
+    // read in filepath, name, token, and database from core
+    const filepath = core.getInput('filepath')
+    const name = core.getInput('name')
+    const token = core.getInput('token')
+    const database = core.getInput('database')
+
+    if (filepath === '') {
+      throw new Error('No filepath provided.')
+    }
+    core.debug('Creating notion client ...')
+    // init the notion client
+    notion = new Client({
+      auth: token,
+      logLevel: LogLevel.ERROR
+    })
+    // if the filepath passed in ends with ".md", we assume it is a filepath to a markdown file
+    if (filepath.endsWith('.md')) {
+      // read the conotents of the filepath
+      fs.readFile(filepath, 'utf-8', (err, data) => {
+        if (err) {
+          core.setFailed(err.message)
+          return
+        }
+        // pass the contents to the addToNotion function
+        addToNotion({
+          content: data,
+          name,
+          database
+        })
+      })
+    } else {
+      // else its assumed to be a string of markdown, so we just pass it to the addToNotion function
+      addToNotion({
+        content: filepath,
+        name,
+        database
+      })
+    }
+  } catch (error) {
+    // if any errors alert github action of failure
+    core.setFailed(error.message)
+  }
+}
+// this function takes in a data object that consists of the content, database, and page name to be created
+// it turns the markdown content into notion blocks then creates the page
+function addToNotion (data) {
+  // convert markdown to blocks
+  const blocks = markdownToBlocks(data.content)
+  core.debug('blocks: ' + JSON.stringify(blocks, null, 4))
+  core.info('Creating page ...')
+  // create the notion page with the database and name as the title
+  notion.pages.create({
+    parent: {
+      database_id: data.database
+    },
+    properties: {
+      Name: {
+        title: [
+          {
+            text: {
+              content: data.name
+            }
+          }
+        ]
+      }
+    },
+    children: blocks
+  }).then((result) => {
+    // when done add success message
+    core.debug(`${JSON.stringify(result, null, 4)}`)
+    core.info('Successfully added Notion Page')
+  })
+}
+
+module.exports = main
+
+
+/***/ }),
+
 /***/ 4596:
 /***/ ((module) => {
 
@@ -20476,73 +20697,9 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-const core = __nccwpck_require__(1863)
-const { Client, LogLevel } = __nccwpck_require__(6851)
-const { markdownToBlocks } = __nccwpck_require__(3580)
-const fs = __nccwpck_require__(7147)
-let notion = {}
+const main = __nccwpck_require__(3297)
 
-try {
-  // `who-to-greet` input defined in action metadata file
-  const filepath = core.getInput('filepath')
-  const name = core.getInput('name')
-  const token = core.getInput('token')
-
-  const database = core.getInput('database')
-
-  core.debug('Creating notion client ...')
-  notion = new Client({
-    auth: token,
-    logLevel: LogLevel.ERROR
-  })
-  if (filepath.endsWith('.md')) {
-    fs.readFile(filepath, 'utf-8', (err, data) => {
-      if (err) {
-        core.setFailed(err.message)
-        return
-      }
-      addToNotion({
-        content: data,
-        name: name,
-        database: database
-      })
-    })
-  } else {
-    addToNotion({
-      content: filepath,
-      name: name,
-      database: database
-    })
-  }
-} catch (error) {
-  core.setFailed(error.message)
-}
-
-function addToNotion (data) {
-  const blocks = markdownToBlocks(data.content)
-  core.debug('blocks: ' + JSON.stringify(blocks, null, 4))
-  core.info('Creating page ...')
-  notion.pages.create({
-    parent: {
-      database_id: data.database
-    },
-    properties: {
-      Name: {
-        title: [
-          {
-            text: {
-              content: data.name
-            }
-          }
-        ]
-      }
-    },
-    children: blocks
-  }).then((result) => {
-    core.debug(`${JSON.stringify(result, null, 4)}`)
-    core.info('Successfully added Notion Page')
-  })
-}
+main()
 
 })();
 
